@@ -3,8 +3,7 @@ import { body} from "express-validator";
 import jwt from 'jsonwebtoken';
 import { Password } from "../services/password";
 import { User } from "../models/user";
-import { validateRequest } from "../middlewares/validate-request";
-import { BadRequestError } from "../errors/bad-request-error";
+import { validateRequest,BadRequestError } from "@tickets-master-lhd/common";
 
 const router = express.Router();
 
@@ -25,11 +24,10 @@ router.post(
       throw new BadRequestError('Invalid credentials');
     }
     const passwordMatch = await Password.compare(existingUser.password,password);
-    console.log(passwordMatch)
     if(!passwordMatch){
       throw new BadRequestError('Invalid credentials');
     }
-
+    
     //Generate JWT
     const userJwt = jwt.sign({
       id:existingUser.id,

@@ -9,6 +9,9 @@
     "test:ci": "jest"
   },
   "jest": {
+    "modulePaths": [
+      "<rootDir>"
+    ],
     "preset": "ts-jest",
     "testEnvironment": "node",
     "setupFilesAfterEnv": [
